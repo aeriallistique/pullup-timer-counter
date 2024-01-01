@@ -1,0 +1,63 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: pink;
+  height: 100%;  
+  font-family: sans-serif, 'Tacoma';
+}
+
+.wrapper{
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+}
+
+.timer-box{
+  font-size: 20vw;
+
+}
+
+
+.buttons{
+  height: 20vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.btn{
+  width: 40%;
+  height: 60px;
+  margin: 0 auto;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.repsNumber{
+  margin-top: 3rem;
+  height: 28vh;
+  width: 40vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.repsNumber span{
+  color: green;
+  font-size:30vh;
+  padding-top: 2rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}

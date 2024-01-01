@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <title>Pull up Timer</title>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="timer-box" id="timerBox">
+      <div id="secondsBox"></div>
+      <div id="minutesBox"></div>
+      <div id="hoursBox" class="hoursBox1">00</div>
+    </div>
+    <div class="buttons">
+      <button class="btn" id="start" >Start</button>
+      <button class="btn" id="stop" >Stop</button>
+      <button class="btn" id="pause">Pause</button>
+    </div>
+    <div class="repsNumber">
+      Number of pullups:
+      <span class="repsNumberSpan"></span>
+    </div>
+    
+    <audio src="ding.mp3" class="ding"></audio>
+  </div>
+
+</body>
+</html>
