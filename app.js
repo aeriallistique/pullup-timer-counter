@@ -30,7 +30,7 @@ function initialize(){
   let intervalID; 
 
 
-    document.addEventListener('keyup', handleSpaceClick)
+    document.addEventListener('keyup', countPullups)
     startBtn.addEventListener('click', start)
     stopBtn.addEventListener('click', stop)
     pauseBtn.addEventListener('click', pause)
@@ -93,13 +93,28 @@ function initialize(){
     pauseBtn.disabled=true;
   }
 
-  function handleSpaceClick(e){
-    if(e.keyCode===32 || which===32){
-      numberOfReps++;
-      repsNumberSpan.innerText = numberOfReps;
-    }
-  }
 
+  const keyCodesAndNumbers = [
+    {code:49, num:1},
+    {code:50, num:2},
+    {code:51, num:3},
+    {code:52, num:4},
+    {code:53, num:5},
+    {code:54, num:6},
+    {code:55, num:7},
+    {code:56, num:8},
+    {code:57, num:9},
+    {code:48, num:10}
+  ]
+
+  function countPullups(e){
+   const found = keyCodesAndNumbers.filter((item,index)=>{
+      if(e.keyCode===item.code ){return item}
+    })
+    numberOfReps = numberOfReps + Number(found[0].num)
+    repsNumberSpan.innerText = numberOfReps;
+  }
+  
 };
 
 initialize();
