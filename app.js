@@ -58,7 +58,7 @@ function initialize(){
       if(seconds > 59){ 
         seconds=0; minutes++;
         changeBgEveryHalfMinute()
-        secondsBox.innerText = `${seconds}`
+        secondsBox.innerText = `0${seconds}`
       }
       if(minutes > 59){
         minutes=0;
