@@ -15,6 +15,14 @@ function initialize(){
   const howManyPullupsLeftDisplay = document.getElementById('howManyPullupsLeft');
   const paceNeededDisplay = document.getElementById('paceNeeded');
   
+
+
+  var t;
+  var s;
+  var totalSecondsElapsed;
+  var startTime;
+  var hasStartBtnBeenPushed = false;
+  var newStartTimePauseBtnPush;
   const pullups = +10000;
   const keyCodesAndNumbers = [
     {code:49, num:1},
@@ -29,12 +37,8 @@ function initialize(){
     {code:48, num:10}
   ]
   
-  let intervalID;
-  let seconds = +00;
-  let minutes = +00;
-  let hours = +00;
+  
   let numberOfReps=+0;
-  let secondsIn24Hours = +86400;
   let pullupsRemaining;
   let bgColor = ['white', '#92C7CF','#AAD7D9', '#FBF9F1', 
     '#E5E1DA', '#7BD3EA', '#A1EEBD', '#F6F7C4', '#F2AFEF', 
@@ -48,9 +52,7 @@ function initialize(){
 
     timerBox.innerText= `${hoursBox.innerText}:${minutesBox.innerText}:${secondsBox.innerText}`;
 
-   
-
-
+  
     document.addEventListener('keyup', countPullups)
     startBtn.addEventListener('click', start)
     stopBtn.addEventListener('click', stop)
@@ -62,68 +64,81 @@ function initialize(){
   }
 
   function changeBgEveryHalfMinute(){
-    if(seconds === 30 || seconds === 0){
-      dingNoise();
       let index = Math.floor(Math.random() * bgColor.length);
-      body.style.backgroundColor = bgColor[index] }
+      body.style.backgroundColor = bgColor[index] 
   }
 
+
   function start(e){
-    e.preventDefault();
-    dingNoise()
-    intervalID = setInterval(()=>{
-      secondsIn24Hours--;
-      seconds++;
-      changeBgEveryHalfMinute()
-      minutes <10 ? minutesBox.innerText=`0${minutes}` : minutesBox.innerText=`${minutes}`
-      seconds < 10 ? secondsBox.innerText=`0${seconds}`: secondsBox.innerText=`${seconds}`
+    e.preventDefault();    
+    hasStartBtnBeenPushed ? 
+      startTime = Number(newStartTimePauseBtnPush)
+      :
+      startTime = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 
-      if(seconds > 59){ 
-        seconds=0; minutes++;
-        changeBgEveryHalfMinute()
-        secondsBox.innerText = `0${seconds}`
-      }
-      if(minutes > 59){
-        minutes=0;
-        minutesBox.innerText=`0${minutes}`;
-        hours++;
-        hoursBox.innerText = `0${hours}`
-      }
-
-      timerBox.innerText= `${hoursBox.innerText}:${minutesBox.innerText}:${secondsBox.innerText}`;
+    console.log('start', newStartTimePauseBtnPush, startTime)
 
 
-    },1000)
+    newStartTimePauseBtnPush = 0;
+    hasStartBtnBeenPushed = false;
+    localStorage.setItem("startTime", startTime); // Store it if I want to restart the timer on the next page
+    
+
+    function startTimeCounter() {
+        console.log('counter', startTime)
+        var now = Math.floor(Date.now() / 1000); // get the time now
+        var diff = now - startTime; // diff in seconds between now and start
+        var h = Math.floor(diff/60/60);
+        var m = Math.floor(diff / 60); // get minutes value (quotient of diff)
+        s = Math.floor(diff % 60); // get seconds value (remainder of diff)
+
+        h = checkTime(h)
+        m = checkTime(m); // add a leading zero if it's single digit
+        s = checkTime(s); // add a leading zero if it's single digit
+        timerBox.innerText = h + ":" + m + ":" + s; // update the element where the timer will appear
+        
+        //play ding and change background every half minute
+        if(s === '00' || s === 30){
+          dingNoise();
+          changeBgEveryHalfMinute();
+        } 
+        totalSecondsElapsed = (h*60*60)+(m*60)+ Number(s);
+        
+        t = setTimeout(startTimeCounter, 500); // set a timeout to update the timer
+    }
+      
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+
+    startTimeCounter();
     startBtn.disabled=true;
     pauseBtn.disabled=false;
-
   }
 
   function stop(){
     startBtn.disabled=false;
-    clearInterval(intervalID);
-    seconds = +0;
-    minutes = +0;
-    minutesBox.innerText=`00`
-    secondsBox.innerText=`00`
-    hoursBox.innerText=`00`;
-    timerBox.innerText= `${hoursBox.innerText}:${minutesBox.innerText}:${secondsBox.innerText}`;
-
+    clearTimeout(t);
   }
 
   function pause(){
-    clearInterval(intervalID)
+    newStartTimePauseBtnPush = Math.floor(Date.now() / 1000);
+    clearTimeout(t);
+    hasStartBtnBeenPushed = true;
+    
     startBtn.disabled=false;
     pauseBtn.disabled=true;
+    console.log('pause', newStartTimePauseBtnPush)
   }
 
   function countPullups(e){
    const found = keyCodesAndNumbers.filter((item,index)=>{
       if(e.keyCode===item.code ){return item}
     })
-    numberOfReps = numberOfReps + Number(found[0].num)
+    numberOfReps = numberOfReps + Number(found[0]?.num)
     repsNumberSpan.innerText = numberOfReps;
-    
+  
     return numberOfReps;
   }
 
@@ -137,6 +152,7 @@ function initialize(){
 
   function howMuchTimeLeft(e){
     e.preventDefault();
+    let secondsIn24Hours = 86400 - totalSecondsElapsed;
      const minutesRemaining = Math.floor(secondsIn24Hours / 60);
      const secondsRemainder = secondsIn24Hours % 60;
      const hoursRemaining = Math.floor(minutesRemaining / 60);
