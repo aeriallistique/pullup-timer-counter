@@ -68,7 +68,8 @@ function initialize(){
       body.style.backgroundColor = bgColor[index] }
   }
 
-  function start(){
+  function start(e){
+    e.preventDefault();
     dingNoise()
     intervalID = setInterval(()=>{
       secondsIn24Hours--;
@@ -134,7 +135,8 @@ function initialize(){
   }
   
 
-  function howMuchTimeLeft(){
+  function howMuchTimeLeft(e){
+    e.preventDefault();
      const minutesRemaining = Math.floor(secondsIn24Hours / 60);
      const secondsRemainder = secondsIn24Hours % 60;
      const hoursRemaining = Math.floor(minutesRemaining / 60);
