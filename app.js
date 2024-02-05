@@ -76,20 +76,19 @@ function initialize(){
       :
       startTime = Math.floor(Date.now() / 1000); //Get the starting time (right now) in seconds
 
-    console.log('start', newStartTimePauseBtnPush, startTime)
-
-
     newStartTimePauseBtnPush = 0;
     hasStartBtnBeenPushed = false;
     localStorage.setItem("startTime", startTime); // Store it if I want to restart the timer on the next page
     
 
     function startTimeCounter() {
-        console.log('counter', startTime)
+        
         var now = Math.floor(Date.now() / 1000); // get the time now
         var diff = now - startTime; // diff in seconds between now and start
+        
         var h = Math.floor(diff/60/60);
         var m = Math.floor(diff / 60); // get minutes value (quotient of diff)
+        if(m > +59){ m = Math.floor(Math.floor(diff / 60) % 60)}
         s = Math.floor(diff % 60); // get seconds value (remainder of diff)
 
         h = checkTime(h)
@@ -129,7 +128,6 @@ function initialize(){
     
     startBtn.disabled=false;
     pauseBtn.disabled=true;
-    console.log('pause', newStartTimePauseBtnPush)
   }
 
   function countPullups(e){
