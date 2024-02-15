@@ -65,7 +65,8 @@ function initialize(){
     if(seconds === 30 || seconds === 0){
       dingNoise();
       // let index = Math.floor(Math.random() * bgColor.length);
-      // body.style.backgroundColor = bgColor[index] }
+      // body.style.backgroundColor = bgColor[index] 
+    }
   }
 
   function start(e){
