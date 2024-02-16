@@ -1,8 +1,9 @@
 function initialize(){
-
+  //  helper funtions to grab DOM elements
   const $ = (item)=>{return document.getElementById(item)};
   const $$ = (item)=>{return document.querySelector(item)}
 
+  // grab DOM elements
   const timerBox = $('timerBox')
   const secondsBox = $('secondsBox')
   const minutesBox = $('minutesBox')
