@@ -1,19 +1,22 @@
 function initialize(){
 
-  const timerBox = document.getElementById('timerBox')
-  const secondsBox = document.getElementById('secondsBox')
-  const minutesBox = document.getElementById('minutesBox')
-  const hoursBox = document.getElementById('hoursBox')
-  const startBtn = document.getElementById('start')
-  const stopBtn = document.getElementById('stop')
-  const pauseBtn = document.getElementById('pause')
+  const $ = (item)=>{return document.getElementById(item)};
+  const $$ = (item)=>{return document.querySelector(item)}
+
+  const timerBox = $('timerBox')
+  const secondsBox = $('secondsBox')
+  const minutesBox = $('minutesBox')
+  const hoursBox = $('hoursBox')
+  const startBtn = $('start')
+  const stopBtn = $('stop')
+  const pauseBtn = $('pause')
   const body = document.body;
-  const ding = document.querySelector('.ding');
-  const repsNumberSpan = document.querySelector('.repsNumberSpan')
-  const howManyLeftButton = document.getElementById('howManyLeft');
-  const timeLeftDisplay = document.getElementById('timeLeftDisplay');
-  const howManyPullupsLeftDisplay = document.getElementById('howManyPullupsLeft');
-  const paceNeededDisplay = document.getElementById('paceNeeded');
+  const ding = $$('.ding');
+  const repsNumberSpan = $$('.repsNumberSpan')
+  const howManyLeftButton = $('howManyLeft');
+  const timeLeftDisplay = $('timeLeftDisplay');
+  const howManyPullupsLeftDisplay = $('howManyPullupsLeft');
+  const paceNeededDisplay = $('paceNeeded');
   
   const pullups = +10000;
   const keyCodesAndNumbers = [
