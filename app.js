@@ -30,7 +30,8 @@ function initialize(){
     {code:55, num:7},
     {code:56, num:8},
     {code:57, num:9},
-    {code:48, num:10}
+    {code:48, num:10},
+    {code:77, num: 0}
   ]
   
   let intervalID;
@@ -125,6 +126,11 @@ function initialize(){
   }
 
   function countPullups(e){
+    //press M to subtract an invalid pullup rep
+   if(e.keyCode === 77){
+     numberOfReps--;
+   }
+   
    const found = keyCodesAndNumbers.filter((item,index)=>{
       if(e.keyCode===item.code ){return item}
     })
