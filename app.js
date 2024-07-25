@@ -68,6 +68,8 @@ function initialize(){
   function changeBgEveryHalfMinute(){
     if(seconds === 30 || seconds === 0){
       dingNoise();
+
+      // background change did not look good for the camera so taken it out.
       // let index = Math.floor(Math.random() * bgColor.length);
       // body.style.backgroundColor = bgColor[index] 
     }
