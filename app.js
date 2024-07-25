@@ -126,11 +126,11 @@ function initialize(){
   }
 
   function countPullups(e){
-    //press M to subtract an invalid pullup rep
+    //press M to subtract 1 invalid pullup rep
    if(e.keyCode === 77){
      numberOfReps--;
    }
-   
+
    const found = keyCodesAndNumbers.filter((item,index)=>{
       if(e.keyCode===item.code ){return item}
     })
