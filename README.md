@@ -2,7 +2,7 @@
 
 # Pull up timer
 
-Pull up timer I put together to help with my attempt to beat the`Guinness Wolrd Record for Most Pull ups in 24 Hours`.
+Pull up timer I put together to help with my attempt to beat the `Guinness Wolrd Record for Most Pull ups in 24 Hours`.
 
 I innitially designed the app for the background color to change every 30 seconds but that did not look good on camera for the official attempt so I commented it out.
 It plays a "ding" every 30 seconds as a loud reminder to get on the bar.
