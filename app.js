@@ -18,6 +18,8 @@ function initialize() {
   const timeLeftDisplay = $('timeLeftDisplay');
   const howManyPullupsLeftDisplay = $('howManyPullupsLeft');
   const paceNeededDisplay = $('paceNeeded');
+  const numberButtonsDiv = $$('.number_buttons');
+  const nubmerButtons = document.querySelectorAll('.number_button');
 
   const pullups = +10000;
   const keyCodesAndNumbers = [
@@ -58,6 +60,27 @@ function initialize() {
   stopBtn.addEventListener('click', stop);
   pauseBtn.addEventListener('click', pause);
   howManyLeftButton.addEventListener('click', howMuchTimeLeft);
+
+  function isHandheldDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  if (isHandheldDevice === true) {
+    numberButtonsDiv.style.display = 'flex';
+  }
+
+  const countPullupsFromNumberButtons = (e) => {
+    e.preventDefault();
+    const currentPullups = Number(repsNumberSpan.innerText);
+
+    repsNumberSpan.innerText = currentPullups + Number(e.target.value);
+  };
+
+
+  nubmerButtons.forEach(number => {
+    number.addEventListener('click', countPullupsFromNumberButtons);
+  });
+
 
   function dingNoise() {
     ding.play();

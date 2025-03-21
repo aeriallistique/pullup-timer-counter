@@ -89,6 +89,14 @@ body {
   margin-bottom: 4rem;
 }
 
+@media (max-width:420px) {
+
+  .timeLeftDisplay,
+  .howManyPullupsLeft,
+  .paceNeeded {
+    font-size: 1rem;
+  }
+}
 
 .timeLeftDisplay,
 .howManyPullupsLeft,
@@ -121,7 +129,30 @@ body {
 
 }
 
-.howManyPullupsLeft {
-  /* border: 1px solid green; */
 
+.number_buttons {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  display: none;
+}
+
+.number_button {
+  width: 80px;
+  height: 30px;
+  font-size: 1.5rem
+}
+
+@media (max-width: 420px) {
+  .buttons {
+    margin: 1rem auto
+  }
+
+  .howManyLeftWrapper {
+    margin: 2.5rem auto;
+  }
 }
