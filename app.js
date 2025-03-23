@@ -65,7 +65,7 @@ function initialize() {
     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
-  if (isHandheldDevice === true) {
+  if (isHandheldDevice() === true) {
     numberButtonsDiv.style.display = 'flex';
   }
 
@@ -164,7 +164,7 @@ function initialize() {
 
   function howManyPullupsLeft() {
     pullupsRemaining = pullups - numberOfReps;
-    howManyPullupsLeftDisplay.innerText = `Pu left: ${pullupsRemaining}`;
+    howManyPullupsLeftDisplay.innerText = `Pull-ups left: ${pullupsRemaining}`;
     return pullupsRemaining;
   }
 
